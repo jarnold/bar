@@ -12,8 +12,12 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-{% seo %}
+  {% seo %}
   </head>
+
+  {% if tags != "" %}
+    {% include collecttags.html %}
+  {% endif %}
 
   <body>
     <header>
@@ -29,51 +33,53 @@
       <div class="inner clearfix">
         <section id="main-content">
 
+        <ul>
+          {% for tag in tags %}
+            <li><a href="/tag/{{ tag }}">{{ tag }}</a></li>
+          {% endfor %}
+        </ul>
 
-    {% for post in site.posts %}
-        <article class="{{post.main-class}}" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-            <span class="ribbon">
-                <a href="{{site.url}}{{site.baseurl}}/category/{{post.main-class}}"><span>{{post.main-class}}</span></a>
-            </span>
-            <div class="box-body">
-                <meta itemprop="datePublished" content="{{post.date | date_to_xmlschema }}">
-                <time itemprop="datePublished" datetime="{{ post.date }}" class="date">{{ post.date | date_to_string }}</time>
-                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-                    <h2 class="post-title" itemprop="name">
-                        {{ post.title }}
-                    </h2>
-                </a>
-                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-                    <p class="description">{{ post.introduction }}</p>
-                </a>
-                <div class="tags">
-                    {% for tag in post.tags %}
-                        <a href="{{site.baseurl}}/tags/#{{tag | slugify }}">{{ tag }}</a>
-                    {% endfor %}
-                </div>
+        {% assign sorted_pages = site.pages | sort:"order"  %}
+        {% for page in sorted_pages %}
+          {% if page.title %}
+            {% assign page_link = "" %}
+            {% if page.github %}
+              {% assign page_link = page.github %}
+            {% elsif page.link %}
+              {% assign page_link = page.link%}
+            {% else %}
+              {% assign page_link = page.url %}
+            {% endif %}
+            <h2 class="post-title" itemprop="name">
+              <a href="{{ page_link }}">{{ page.title | capitalize }}</a>
+            </h2>
+            {% if page.headline %}
+              <h3>
+                {{ page.headline }}
+              </h3>
+            {% endif %}
+            {% if page.github %}
+              <div>
+                <a href="{{ page.github }}"><img width="100" src="assets/images/GitHub_Logo.png" /></a>
+              </div>
+           {% endif %}
+           {% if page.link %}
+              <div>
+                <a href="{{ page.link }}">Link</a>
+              </div>
+           {% endif %}
+           <div>
+              {{ page.description }}
             </div>
-        </article>
-    {% endfor %}
-
-
+          {% endif %}
+        {% endfor %}
 
         </section>
 
         <aside id="sidebar">
-          {% if site.show_downloads %}
-            <a href="{{ site.github.zip_url }}" class="button">
-              <small>Download</small>
-              .zip file
-            </a>
-            <a href="{{ site.github.tar_url }}" class="button">
-              <small>Download</small>
-              .tar.gz file
-            </a>
-          {% endif %}
 
-          {% if site.github.is_project_page %}
-            <p class="repo-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</p>
-          {% endif %}
+          <p><a href="https://swiftstack.com">SwiftStack</a></p>
+          <p><a href="https://swiftstack.com/docs">SwiftStack Documentation</a></p>
 
         </aside>
       </div>

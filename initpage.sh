@@ -33,7 +33,8 @@ POST_TITLE="${@:2:$(($#-1))}"
 POST_NAME="$(echo ${@:2:$(($#-1))} | sed -e 's/ /-/g' | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/")"
 CURRENT_DATE="$(date -u +'%Y-%m-%d')"
 TIME=$(date -u +"%T")
-FILE_NAME="${CURRENT_DATE}-${POST_NAME}.md"
+#FILE_NAME="${CURRENT_DATE}-${POST_NAME}.md"
+FILE_NAME="${POST_NAME}.md"
 # ----------------------------------------------------------------
 
 
@@ -42,7 +43,7 @@ FILE_NAME="${CURRENT_DATE}-${POST_NAME}.md"
 
 # Set your destination folder
 BINPATH=$(cd `dirname $0`; pwd)
-POSTPATH="${BINPATH}/_posts"
+POSTPATH="${BINPATH}/_pages"
 DIST_FOLDER="$POSTPATH"
 
 # Set your blog URL
@@ -111,18 +112,17 @@ initpost_content() {
 
 echo "---"
 echo "layout: post"
-echo "comments: true"
+echo "order: 1000"
 echo "title: \"${POST_TITLE}\""
 echo "date: ${CURRENT_DATE} ${TIME}"
-echo "image: '/assets/img/'"
-echo "description:"
-echo "main-class:"
-echo "color:"
+echo "github: https://github.com/swiftstack/${POST_TITLE}"
+echo "link: "
+echo "icon: '/assets/images/swiftstack-devops.png'"
+echo "headline:"
+echo "summary:"
 echo "tags:"
-echo "categories:"
-echo "twitter_text:"
-echo "introduction:"
 echo "---"
+echo "Write your copy in markdown here if not a github or link to external site."
 
 }
 
