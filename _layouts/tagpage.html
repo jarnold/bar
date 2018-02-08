@@ -1,0 +1,14 @@
+    {% include header.html %}
+
+        <h1>{{ page.tag | capitalize }}</h1>
+        {% assign sorted_pages = site.pages | sort:"order"  %}
+        {% for card in sorted_pages %}
+          {% assign tags = card.tags | split:'|' %}
+          {% for tag in tags %}
+            {% if tag == page.tag %}
+              {% include card.html %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+
+    {% include footer.html %}

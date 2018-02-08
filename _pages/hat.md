@@ -8,7 +8,6 @@ image: '/assets/img/'
 description:
 main-class:
 color:
-tags:
 categories:
 twitter_text:
 introduction:

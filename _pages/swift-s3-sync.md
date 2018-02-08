@@ -8,5 +8,5 @@ link:
 icon: '/assets/images/swiftstack-devops.png'
 headline: Migrate your data!
 summary: Write your copy in markdown here if not a github or link to external site.
-tags:
+tags: core
 ---

@@ -1,0 +1,31 @@
+          {% if card.tags %}
+            {% assign card_link = "" %}
+            {% if card.github %}
+              {% assign card_link = card.github %}
+            {% elsif card.link %}
+              {% assign card_link = card.link%}
+            {% else %}
+              {% assign card_link = card.url %}
+            {% endif %}
+            <h2 class="post-title" itemprop="name">
+              <a href="{{ card_link }}">{{ card.title | capitalize }}</a>
+            </h2>
+            {% if card.headline %}
+              <h3>
+                {{ card.headline }}
+              </h3>
+            {% endif %}
+            {% if card.github %}
+              <div>
+                <a href="{{ card.github }}"><img width="100" src="/assets/images/GitHub_Logo.png" /></a>
+              </div>
+           {% endif %}
+           {% if card.link %}
+              <div>
+                <a href="{{ card.link }}">Link</a>
+              </div>
+           {% endif %}
+           <div>
+              {{ card.description }}
+           </div>
+         {% endif %}

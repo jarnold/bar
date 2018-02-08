@@ -8,6 +8,6 @@ link:
 icon: '/assets/images/swiftstack-devops.png'
 headline: Avid Media Archive
 summary: Example HOWTO to archive assets from Avid Media Archive.
-tags: media code-examples
+tags: media|code-examples
 ---
 This is all about Avid Media Integration! 
